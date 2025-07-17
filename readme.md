@@ -1,6 +1,6 @@
 # 📘 Project Title
 
-Note app which lets you add the notes.
+Note app which lets you add the notes. Backend
 
 ---
 
