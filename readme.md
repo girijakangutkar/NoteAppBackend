@@ -4,6 +4,11 @@ Note app which lets you add the notes.
 
 ---
 
+## Tools
+
+-- Version is controlled by gitHub
+-- Deployed on Render
+
 ## 🚀 Features
 
 - Add note based on user role: "uses", "admin", "moderator"
@@ -72,7 +77,7 @@ delete /notes/:id{
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/girijakangutkar/NoteAppBackend.git
 
 # Navigate into the project directory
 cd your-repo-name
@@ -82,4 +87,10 @@ npm install
 
 # Start the development server
 npm start
+
+#Deployed Backend on Render
+https://noteme-gtbw.onrender.com/
+
+#GitHub project link
+https://github.com/girijakangutkar/NoteAppBackend
 ```
