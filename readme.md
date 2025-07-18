@@ -1,4 +1,4 @@
-# 📘 Project Title
+# 📘 NoteApp backend
 
 Note app which lets you add the notes. Backend
 
