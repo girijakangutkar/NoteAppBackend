@@ -141,17 +141,6 @@ json
 
 ---
 
-## 🤝 Contribution Guidelines
-
-1. **Fork the repository.**
-2. **Create a new branch** for your feature or bug fix.
-3. **Make your changes** and ensure they are well-tested.
-4. **Submit a pull request** with a clear description of your changes.
-
-> **Note**: Follow the existing code style and conventions.  Ensure your code is well-commented.
-
----
-
 ## 🚀 Deployment
 
 The backend is deployed on Render.  Here are the steps for deploying your own instance:
