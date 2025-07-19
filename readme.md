@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # 📝 NoteHere - Smart Notes Management System Backend
+=======
+# 📘 NoteApp backend
+>>>>>>> 37b04ee7e43482381f8f52d5621b87eaf934b97e
 
 Note app which lets you add the notes. Backend
 
