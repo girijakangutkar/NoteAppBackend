@@ -1,4 +1,4 @@
-# 📘 Project Title
+# 📝 NoteHere - Smart Notes Management System Backend
 
 Note app which lets you add the notes. Backend
 
@@ -17,6 +17,54 @@ Note app which lets you add the notes. Backend
 
 ---
 
+### 🔐 Authentication & Authorization
+
+- **Secure User Registration** - Create accounts with encrypted passwords using bcrypt
+- **JWT-based Authentication** - Secure login sessions with token-based authentication
+- **Role-based Access Control** - Three user roles: User, Admin, and Moderator
+- **Password Security** - Industry-standard password hashing and validation
+
+### 📋 Note Management
+
+- **Create Notes** - Add new notes with titles and content
+- **View Notes** - Display all your notes in an organized layout
+- **Edit Notes** - Update existing notes with real-time changes
+- **Delete Notes** - Remove notes you no longer need
+- **User-specific Content** - Each user can only access their own notes
+
+---
+
+### Frontend
+
+- **React** - Modern JavaScript library for building user interfaces
+- **Tailwind CSS** - Utility-first CSS framework for rapid UI development
+- **Lucide React** - Beautiful and customizable SVG icons
+- **Axios** - HTTP client for API requests
+
+### Backend
+
+- **Node.js** - JavaScript runtime for server-side development
+- **Express.js** - Fast and minimalist web framework
+- **JWT** - JSON Web Tokens for secure authentication
+- **bcrypt** - Password hashing library for security
+
+### Database
+
+- **MongoDB** - NoSQL database for flexible data storage
+- **Mongoose** - MongoDB object modeling for Node.js
+
+### Deployment
+
+- **Vercel** - Frontend deployment and hosting
+- **MongoDB Atlas** - Cloud database hosting
+
+---
+
+**Access the application**
+
+- Frontend: `https://notehere.vercel.app`
+- Backend API: `https://noteme-gtbw.onrender.com`
+
 ## 🛠️ Tech Stack
 
 - Frontend: React, Tailwind CSS
@@ -26,52 +74,124 @@ Note app which lets you add the notes. Backend
 
 ---
 
-## Env Secret
+## **Environment Setup**
 
-- Mongo URI
+Create a `.env` file in the backend directory:
 
-## API endPoint
+```env
+# Database Configuration
+MONGO_URI=your_mongodb_connection_string
 
---User routes
-post /signup
+```
+
+---
+
+## 📊 API Documentation
+
+### Authentication Endpoints
+
+#### Register User
+
+```http
+POST /api/auth/signup
+Content-Type: application/json
+
 {
----- name:String, required
----- email:String, required
----- password: String, required
----- role: String, default:"role"
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "securePassword123",
+  "role": "user" // Optional: "user" | "admin" | "moderator"
 }
+```
 
-post /login
+**Response:**
+
+```json
 {
----- email:String, required
----- password: String, required
+  "success": true,
+  "message": "User created successfully",
+  "token": "jwt_token_here",
+  "user": {
+    "id": "user_id",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "role": "user"
+  }
 }
+```
 
-post /notes
+#### Login User
+
+```http
+POST /api/auth/login
+Content-Type: application/json
+
 {
----- title: String,
----- content: String,
----- createdBy: userId
+  "email": "john@example.com",
+  "password": "securePassword123"
 }
+```
 
-get /notes{
----- title: String,
----- content: String,
----- createdBy: userId
-}
+### Notes Endpoints
 
-put /notes/:id
+#### Create Note
+
+```http
+POST /api/notes
+Authorization: Bearer <jwt_token>
+Content-Type: application/json
+
 {
----- title: String,
----- content: String,
----- createdBy: userId
+  "title": "My First Note",
+  "content": "This is the content of my note"
 }
+```
 
-delete /notes/:id{
----- title: String,
----- content: String,
----- createdBy: userId
+#### Get All Notes
+
+```http
+GET /api/notes
+Authorization: Bearer <jwt_token>
+```
+
+#### Update Note
+
+```http
+PUT /api/notes/:noteId
+Authorization: Bearer <jwt_token>
+Content-Type: application/json
+
+{
+  "title": "Updated Note Title",
+  "content": "Updated note content"
 }
+```
+
+#### Delete Note
+
+```http
+DELETE /api/notes/:noteId
+Authorization: Bearer <jwt_token>
+```
+
+## Folder structure
+
+---
+
+├── backend/
+│ ├── models/
+│ │ ├── UserModel.js
+│ │ └── NoteModel.js
+│ ├── routes/
+│ │ ├── UserRoutes.js
+│ │ └── NotesRoutes.js
+│ ├── middleware/
+│ │ └── auth.js
+│ ├── config/
+│ │ └── db.js
+│ └── server.js
+
+---
 
 ## 📦 Installation
 
