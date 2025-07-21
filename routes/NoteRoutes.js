@@ -26,7 +26,11 @@ NotesRouter.post(
   authMiddleware(["user", "admin"]),
   async (req, res) => {
     try {
-      const newNote = { ...req.body, createdBy: req.userId };
+      const newNote = {
+        ...req.body,
+        createdBy: req.userId,
+        creation: Date.now(),
+      };
       const addData = await NoteModel.create(newNote);
       res.status(201).json({ msg: "Note added", addData });
     } catch (error) {
@@ -43,7 +47,7 @@ NotesRouter.put(
     try {
       const userId = req.userId;
       const userNotes = await NoteModel.findByIdAndUpdate(
-        { _id: req.params.id, createdBy: userId },
+        { _id: req.params.id, createdBy: userId, creation: Date.now() },
         req.body,
         { new: true }
       );
