@@ -47,7 +47,7 @@ NotesRouter.put(
     try {
       const userId = req.userId;
       const userNotes = await NoteModel.findByIdAndUpdate(
-        { _id: req.params.id, createdBy: userId, creation: Date.now() },
+        { _id: req.params.id, createdBy: userId },
         req.body,
         { new: true }
       );
