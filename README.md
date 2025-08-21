@@ -53,7 +53,6 @@ bash
 ## 🛡️ User Roles and Access Control
 
 - **User**: Can create, read, update, and delete their own notes.
-- **Moderator**: Can read and delete any note.
 - **Admin**: Has full access, including managing users and notes.
 
 ---
