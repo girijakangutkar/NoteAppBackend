@@ -46,26 +46,30 @@ NotesRouter.put(
   async (req, res) => {
     try {
       const userId = req.userId;
+
+      // Remove the creation field from req.body to prevent it from being updated
       const { creation, ...updateData } = req.body;
+
+      // Find the note first to check ownership
       const existingNote = await NoteModel.findById(req.params.id);
 
       if (!existingNote) {
         return res.status(404).json({ msg: "Note not found" });
       }
 
+      // Check if user owns the note (unless admin/moderator)
       if (req.role === "user" && existingNote.createdBy.toString() !== userId) {
         return res.status(403).json({ msg: "Access denied" });
       }
 
-      const userNotes = await NoteModel.findByIdAndUpdate(
+      // Update the note
+      const updatedNote = await NoteModel.findByIdAndUpdate(
         req.params.id,
         updateData,
         { new: true }
       );
-      if (!userNotes) {
-        return res.status(404).json({ msg: "Note not found" });
-      }
-      res.status(200).json({ msg: "Note updated", userNotes });
+
+      res.status(200).json({ msg: "Note updated", userNotes: updatedNote });
     } catch (error) {
       console.log(error.message);
       res.status(500).json({ msg: "Something went wrong" });
@@ -78,12 +82,13 @@ NotesRouter.delete(
   authMiddleware(["user", "admin"]),
   async (req, res) => {
     try {
-      const userId = req.params;
-      let findNote = await NoteModel.findByIdAndDelete({
+      const findNote = await NoteModel.findOneAndDelete({
         _id: req.params.id,
         createdBy: req.userId,
       });
+
       if (!findNote) return res.status(404).json({ msg: "Note not found" });
+
       res.status(200).json({ msg: "Deleted successfully" });
     } catch (error) {
       console.log(error.message);
