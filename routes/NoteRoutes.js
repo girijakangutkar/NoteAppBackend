@@ -47,8 +47,14 @@ NotesRouter.put(
     try {
       const userId = req.userId;
       const { creation, ...updateData } = req.body;
+      const existingNote = await NoteModel.findById(req.params.id);
+
+      if (!existingNote) {
+        return res.status(404).json({ msg: "Note not found" });
+      }
+
       const userNotes = await NoteModel.findByIdAndUpdate(
-        { _id: req.params.id, createdBy: userId },
+        req.params.id,
         updateData,
         { new: true }
       );
