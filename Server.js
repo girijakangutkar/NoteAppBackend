@@ -12,7 +12,14 @@ app.get("/", (req, res) => {
   res.status(200).json("Everything is working fine");
 });
 
-app.use(cors());
+const cors = require("cors");
+app.use(
+  cors({
+    origin: "https://notehere.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 app.use("/api", UserRouter);
 
