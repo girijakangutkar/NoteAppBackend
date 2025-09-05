@@ -46,11 +46,15 @@ NotesRouter.put(
   async (req, res) => {
     try {
       const userId = req.userId;
+      const { creation, ...updateData } = req.body;
       const userNotes = await NoteModel.findByIdAndUpdate(
         { _id: req.params.id, createdBy: userId },
-        req.body,
+        updateData,
         { new: true }
       );
+      if (!userNotes) {
+        return res.status(404).json({ msg: "Note not found" });
+      }
       res.status(200).json({ msg: "Note updated", userNotes });
     } catch (error) {
       console.log(error.message);
