@@ -53,6 +53,10 @@ NotesRouter.put(
         return res.status(404).json({ msg: "Note not found" });
       }
 
+      if (req.role === "user" && existingNote.createdBy.toString() !== userId) {
+        return res.status(403).json({ msg: "Access denied" });
+      }
+
       const userNotes = await NoteModel.findByIdAndUpdate(
         req.params.id,
         updateData,
