@@ -3,6 +3,7 @@ const UserRouter = express.Router();
 const bcrypt = require("bcrypt");
 const UserModel = require("../model/UserModel");
 const saltRounds = 10;
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
 UserRouter.post("/signup", async (req, res) => {
@@ -17,7 +18,7 @@ UserRouter.post("/signup", async (req, res) => {
       }
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).json({ msg: "Something went wrong" });
   }
 });
@@ -39,12 +40,15 @@ UserRouter.post("/login", async (req, res) => {
       }
       if (result) {
         const userRole = user.role || "user";
-        let token = jwt.sign({ userId: user._id, role: userRole }, "shhhhh");
+        let token = jwt.sign(
+          { userId: user._id, role: userRole },
+          process.env.JWT_SECRET
+        );
         res.status(200).json({ msg: "User logged in", token: token });
       }
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).json({ msg: "Something went wrong" });
   }
 });
