@@ -35,7 +35,7 @@ UserRouter.post("/signup", async (req, res) => {
 
       // Generate verification token
       const verificationToken = crypto.randomBytes(32).toString("hex");
-      const frontendURI = "https://notehere.vercel.app"
+      const backend_URI = process.env.backend_URI || "http://localhost:3000"
       const tokenExpiry = Date.now() + 3600000; // 1 hour
 
       const newUser = await UserModel.create({
