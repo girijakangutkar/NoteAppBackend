@@ -52,4 +52,27 @@ UserRouter.post("/login", async (req, res) => {
     res.status(500).json({ msg: "Something went wrong" });
   }
 });
+
+UserRouter.get("/verify/:token", async (req, res) => {
+  try {
+    const { token } = req.params;
+    const user = await UserModel.findOne({
+      verificationToken: token,
+      verificationTokenExpiry: { $gt: Date.now() },
+    });
+
+    if (!user) return res.status(400).json({ msg: "Invalid or expired token" });
+
+    user.isVerified = true;
+    user.verificationToken = undefined;
+    user.verificationTokenExpiry = undefined;
+    await user.save();
+
+    res.status(200).json({ msg: "Email verified successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Something went wrong" });
+  }
+});
+
 module.exports = UserRouter;
