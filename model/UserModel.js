@@ -8,7 +8,9 @@ const UserSchema = new mongoose.Schema({
   isVerified: { type: Boolean, default: false },  
   verificationToken: String,                   
   verificationTokenExpiry: Date      
-});
+},
+   { timestamps: true } 
+);
 
 const UserModel = mongoose.model("users", UserSchema);
 
