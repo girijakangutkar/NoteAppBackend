@@ -5,6 +5,9 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   password: String,
   role: { type: String, default: "user" },
+  isVerified: { type: Boolean, default: false },  
+  verificationToken: String,                   
+  verificationTokenExpiry: Date     
 });
 
 const UserModel = mongoose.model("users", UserSchema);
