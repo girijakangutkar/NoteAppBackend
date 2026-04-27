@@ -7,7 +7,7 @@ const NoteSchema = new mongoose.Schema({
   // coverPage:{type:String},
   publishStatus: { type: Boolean, default: false },
   creation: { type: Date, default: new Date() },
-});
+},  { timestamps: true } );
 
 const NoteModel = mongoose.model("notes", NoteSchema);
 
